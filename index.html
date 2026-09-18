@@ -35,7 +35,6 @@
   </script>
 
   <style>
-    /* Custom Scrollbar */
     ::-webkit-scrollbar {
       width: 6px;
     }
@@ -47,7 +46,7 @@
       border-radius: 4px;
     }
 
-    /* Pulsing Lights Effect */
+    /* Pulsing Christmas Lights */
     @keyframes blink {
       0%, 100% { opacity: 1; filter: drop-shadow(0 0 5px #FFD700); }
       50% { opacity: 0.3; filter: drop-shadow(0 0 1px #FFD700); }
@@ -59,14 +58,14 @@
     .light-bulb:nth-child(3n) { animation-delay: 0.6s; }
     .light-bulb:nth-child(4n) { animation-delay: 0.9s; }
 
-    /* Glassmorphism */
+    /* Glassmorphism Cards */
     .glass-card {
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.93);
       backdrop-filter: blur(10px);
       border: 2px solid #FFD700;
     }
 
-    /* Video Mirroring for Front Camera */
+    /* Camera Mirror Transformation */
     .mirror-mode {
       transform: scaleX(-1);
     }
@@ -83,16 +82,15 @@
 </head>
 <body class="bg-gradient-to-b from-natalDarkRed via-natalRed to-natalGreen min-h-screen text-slate-800 font-sans relative overflow-x-hidden pb-12">
 
-  <!-- Snow Canvas Overlay -->
   <canvas id="snowCanvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-10"></canvas>
 
-  <!-- Main Container -->
+  <!-- Main Responsive Container -->
   <div class="max-w-md mx-auto px-4 pt-4 relative z-20">
 
-    <!-- Header -->
     <header class="text-center mb-5 relative">
-      <button id="btnOpenConfig" class="absolute right-0 top-0 text-white/70 hover:text-natalGold text-xl p-2 transition" title="Configurações da Confeitaria">
-        <i class="fa-solid fa-gear"></i>
+      <!-- Admin Button (Only visible when ?admin=true is present) -->
+      <button id="btnOpenConfig" class="hidden absolute right-0 top-0 bg-natalGold text-natalDarkRed hover:bg-yellow-300 w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition transform active:scale-90" title="Configurações da Confeitaria (Admin)">
+        <i class="fa-solid fa-gear text-lg"></i>
       </button>
 
       <div class="inline-block bg-natalGold text-natalDarkRed px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 shadow-md">
@@ -107,7 +105,6 @@
       </p>
     </header>
 
-    <!-- Camera Section Container -->
     <main class="glass-card rounded-3xl p-3 sm:p-4 shadow-2xl mb-6 relative overflow-hidden">
       
       <!-- Decorative Christmas Lights Strand -->
@@ -128,14 +125,14 @@
         <!-- Video Stream -->
         <video id="videoFeed" autoplay playsinline class="w-full h-full object-cover mirror-mode"></video>
 
-        <!-- Shutter Flash Effect Overlay -->
+        <!-- Flash Effect -->
         <div id="flashOverlay" class="absolute inset-0 pointer-events-none hidden z-40"></div>
 
-        <!-- CAMERA OVERLAY MASK (MÁSCARA DE NATAL) -->
+        <!-- CAMERA OVERLAY MASK -->
         <div id="cameraOverlay" class="absolute inset-0 pointer-events-none flex flex-col justify-between p-3 z-30 select-none">
           
-          <!-- Top Overlay: Garland Header & Instagram Tag -->
-          <div class="w-full bg-gradient-to-b from-black/70 via-black/30 to-transparent p-2 rounded-t-xl text-center text-white">
+          <!-- Top Banner: Message -->
+          <div class="w-full bg-gradient-to-b from-black/80 via-black/40 to-transparent p-2 rounded-t-xl text-center text-white">
             <div class="text-xs font-semibold text-natalGold tracking-wide flex items-center justify-center gap-1">
               <span>🎄</span>
               <span id="overlayMsgTop">Feliz Natal com Doçura!</span>
@@ -143,34 +140,34 @@
             </div>
           </div>
 
-          <!-- Middle Overlay: Character / Baker Mascot (Bottom Right or Bottom Left) -->
+          <!-- Center Layer: Baker Avatar -->
           <div class="flex-1 flex items-end justify-between relative">
             
-            <!-- Avatar Boleira (Lado Esquerdo) -->
-            <div class="relative w-32 sm:w-36 -ml-2 -mb-2 group filter drop-shadow-xl transition-all duration-300">
+            <!-- Baker Cutout / Avatar -->
+            <div class="relative w-32 sm:w-36 -ml-2 -mb-2 filter drop-shadow-xl transition-all duration-300">
               <img id="imgBaker" src="https://images.unsplash.com/photo-1583394293214-28ded15ee548?w=400&auto=format&fit=crop&q=80" 
                    alt="Boleira de Natal" 
                    class="w-full h-36 sm:h-40 object-cover rounded-2xl border-2 border-natalGold shadow-lg"
                    onerror="this.src='https://placehold.co/150x200/C41E3A/FFD700?text=Boleira+de+Natal'">
-              <!-- Santa Hat Overlay on Avatar -->
+              <!-- Santa Hat Badge -->
               <div class="absolute -top-4 -left-3 text-3xl transform -rotate-12 filter drop-shadow">🎅</div>
-              <!-- Cake Slice Badge -->
+              <!-- Special Badge -->
               <div class="absolute -bottom-1 -right-1 bg-white text-natalDarkRed font-bold text-[10px] px-1.5 py-0.5 rounded-full border border-natalGold shadow flex items-center gap-0.5">
                 <span>🍰</span> Especial
               </div>
             </div>
 
-            <!-- Frame Right Side Graphic Elements -->
+            <!-- Side Graphic -->
             <div class="text-right mb-2">
-              <div class="inline-block bg-red-600/90 text-white text-[11px] font-bold px-2.5 py-1 rounded-full shadow border border-natalGold mb-1">
-                <i class="fa-solid fa-gift text-natalGold mr-1"></i> Participe!
+              <div class="inline-block bg-red-600/90 text-white text-[11px] font-bold px-2.5 py-1 rounded-full shadow border border-natalGold">
+                <i class="fa-solid fa-gift text-natalGold mr-1"></i> Sorteio!
               </div>
             </div>
 
           </div>
 
-          <!-- Bottom Overlay: Instagram Handle Banner -->
-          <div class="w-full bg-gradient-to-t from-black/80 via-black/40 to-transparent p-2 rounded-b-xl text-center">
+          <!-- Bottom Banner: Instagram Handle -->
+          <div class="w-full bg-gradient-to-t from-black/85 via-black/40 to-transparent p-2 rounded-b-xl text-center">
             <div class="inline-flex items-center gap-1.5 bg-black/60 backdrop-blur-md text-natalGold px-3 py-1 rounded-full border border-natalGold/50 text-xs font-bold tracking-wider shadow">
               <i class="fa-brands fa-instagram text-sm text-pink-400"></i>
               <span id="overlayHandle">@sua_confeitaria_aqui</span>
@@ -179,14 +176,14 @@
 
         </div>
 
-        <!-- Initial Camera Permission Request Screen -->
+        <!-- Camera Start Button Overlay -->
         <div id="cameraStartPrompt" class="absolute inset-0 bg-slate-900/90 flex flex-col items-center justify-center p-6 text-center text-white z-40">
           <div class="w-16 h-16 bg-natalRed/20 text-natalGold border-2 border-natalGold rounded-full flex items-center justify-center text-3xl mb-4 animate-bounce">
             <i class="fa-solid fa-camera"></i>
           </div>
           <h3 class="text-xl font-bold text-natalGold mb-2">Sua Selfie de Natal</h3>
           <p class="text-xs text-slate-300 mb-6 leading-relaxed">
-            Precisamos de acesso à sua câmera frontal para posicionar você ao lado da nossa confeiteira!
+            Clique abaixo para autorizar o uso da câmera e tirar sua foto com nossa confeiteira!
           </p>
           <button id="btnStartCamera" class="w-full py-3 px-6 bg-gradient-to-r from-natalGold to-yellow-500 hover:from-yellow-400 hover:to-natalGold text-natalDarkRed font-extrabold rounded-2xl shadow-lg transform active:scale-95 transition flex items-center justify-center gap-2">
             <i class="fa-solid fa-video"></i>
@@ -196,29 +193,25 @@
 
       </div>
 
-      <!-- CAMERA CONTROLS (Active Screen) -->
       <div id="cameraControls" class="mt-4 flex items-center justify-between gap-3">
         <!-- Flip Camera Button -->
         <button id="btnFlipCamera" class="w-12 h-12 rounded-2xl bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center justify-center shadow-md active:scale-90 transition" title="Alternar Câmera">
           <i class="fa-solid fa-rotate text-lg"></i>
         </button>
 
-        <!-- Main Shutter Button -->
-        <button id="btnCapture" class="flex-1 py-3 px-4 bg-gradient-to-r from-natalRed to-natalDarkRed hover:from-red-600 hover:to-natalRed text-white font-bold rounded-2xl shadow-xl border-2 border-natalGold flex items-center justify-center gap-2 text-base active:scale-95 transition">
+        <!-- Shutter Button -->
+        <button id="btnCapture" class="flex-1 py-3 px-4 bg-gradient-to-r from-natalRed to-natalDarkRed hover:from-red-600 hover:to-natalRed text-white font-bold rounded-2xl shadow-xl border-2 border-natalGold flex items-center justify-center gap-2 text-base active:scale-95 transition relative overflow-hidden">
           <div class="w-4 h-4 rounded-full bg-white animate-ping absolute opacity-30"></div>
           <i class="fa-solid fa-camera text-xl text-natalGold"></i>
           Tirar Selfie Natalina
         </button>
       </div>
 
-      <!-- CAPTURED PHOTO RESULT VIEW (Hidden initially) -->
       <div id="photoResultContainer" class="hidden">
         <div class="relative rounded-2xl overflow-hidden bg-black aspect-[3/4] shadow-inner mb-4">
-          <!-- Final Captured Image -->
           <img id="imgCaptured" class="w-full h-full object-cover" alt="Sua Selfie de Natal">
         </div>
 
-        <!-- Post-Capture Action Buttons -->
         <div class="space-y-2.5">
           <!-- Download Button -->
           <button id="btnDownload" class="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-2xl shadow-lg border border-emerald-400 flex items-center justify-center gap-2 active:scale-95 transition">
@@ -226,13 +219,13 @@
             Baixar Foto no Celular
           </button>
 
-          <!-- Open Instagram Button -->
+          <!-- Instagram Button -->
           <button id="btnInstagram" class="w-full py-3 px-4 bg-gradient-to-r from-purple-600 via-pink-600 to-amber-500 hover:opacity-95 text-white font-bold rounded-2xl shadow-lg flex items-center justify-center gap-2 active:scale-95 transition">
             <i class="fa-brands fa-instagram text-xl"></i>
             Postar nos Stories do Instagram
           </button>
 
-          <!-- Retake Photo Button -->
+          <!-- Retake Button -->
           <button id="btnRetake" class="w-full py-2.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-2xl shadow flex items-center justify-center gap-2 text-sm active:scale-95 transition">
             <i class="fa-solid fa-arrows-rotate"></i>
             Tirar Outra Foto
@@ -242,7 +235,6 @@
 
     </main>
 
-    <!-- Instructions Card -->
     <section class="glass-card rounded-3xl p-5 shadow-xl mb-6 text-slate-800">
       <h2 class="text-lg font-bold text-natalDarkRed mb-4 flex items-center gap-2">
         <i class="fa-solid fa-award text-natalGold text-xl"></i>
@@ -253,25 +245,25 @@
         <li class="flex items-start gap-3">
           <span class="w-6 h-6 rounded-full bg-natalRed text-white font-bold text-xs flex items-center justify-center shrink-0 shadow">1</span>
           <div>
-            <strong>Tire sua selfie</strong> ao lado da foto da nossa confeiteira usando a moldura festiva.
+            <strong>Tire sua selfie</strong> ao lado da foto da nossa confeiteira.
           </div>
         </li>
         <li class="flex items-start gap-3">
           <span class="w-6 h-6 rounded-full bg-natalRed text-white font-bold text-xs flex items-center justify-center shrink-0 shadow">2</span>
           <div>
-            <strong>Salve a foto</strong> clicando no botão "Baixar Foto no Celular".
+            <strong>Clique em Baixar Foto</strong> para salvá-la em seu dispositivo.
           </div>
         </li>
         <li class="flex items-start gap-3">
           <span class="w-6 h-6 rounded-full bg-natalRed text-white font-bold text-xs flex items-center justify-center shrink-0 shadow">3</span>
           <div>
-            <strong>Poste no Stories</strong> do Instagram e marque nosso perfil <span id="instructionHandle" class="font-bold text-natalDarkRed">@sua_confeitaria_aqui</span>.
+            <strong>Poste no Stories</strong> e marque nosso perfil <span id="instructionHandle" class="font-bold text-natalDarkRed">@sua_confeitaria_aqui</span>.
           </div>
         </li>
         <li class="flex items-start gap-3">
           <span class="w-6 h-6 rounded-full bg-natalRed text-white font-bold text-xs flex items-center justify-center shrink-0 shadow">4</span>
           <div>
-            <strong>Curta o post oficial</strong> do sorteio no feed para validar sua participação! 🎁
+            <strong>Curta a publicação oficial</strong> do sorteio no nosso feed! 🎁
           </div>
         </li>
       </ol>
@@ -285,7 +277,6 @@
 
   </div>
 
-  <!-- CONFIGURATION MODAL (Para a Cliente/Boleira Editar) -->
   <div id="modalConfig" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
     <div class="bg-white rounded-3xl p-6 w-full max-w-sm shadow-2xl border-2 border-natalGold relative">
       <button id="btnCloseConfig" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-xl">
@@ -295,7 +286,7 @@
       <h3 class="text-lg font-bold text-natalDarkRed mb-1 flex items-center gap-2">
         <i class="fa-solid fa-sliders"></i> Painel da Confeitaria
       </h3>
-      <p class="text-xs text-slate-500 mb-4">Personalize os dados da sua promoção rapidamente:</p>
+      <p class="text-xs text-slate-500 mb-4">Personalize os dados que os clientes verão ao ler o QR Code:</p>
 
       <form id="formConfig" class="space-y-3 text-xs">
         <div>
@@ -304,35 +295,34 @@
         </div>
 
         <div>
-          <label class="block font-semibold text-slate-700 mb-1">Título do Evento:</label>
+          <label class="block font-semibold text-slate-700 mb-1">Título da Promoção:</label>
           <input type="text" id="cfgTitle" value="Selfie de Natal" class="w-full px-3 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-natalRed">
         </div>
 
         <div>
-          <label class="block font-semibold text-slate-700 mb-1">Mensagem do Overlay:</label>
+          <label class="block font-semibold text-slate-700 mb-1">Mensagem Festiva:</label>
           <input type="text" id="cfgMsg" value="Feliz Natal com Doçura!" class="w-full px-3 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-natalRed">
         </div>
 
         <div>
-          <label class="block font-semibold text-slate-700 mb-1">Foto da Boleira (URL ou Upload):</label>
-          <input type="text" id="cfgBakerUrl" placeholder="https://..." class="w-full px-3 py-2 rounded-xl border border-slate-300 mb-2 focus:outline-none focus:ring-2 focus:ring-natalRed">
+          <label class="block font-semibold text-slate-700 mb-1">Sua Foto/Avatar (URL ou Enviar arquivo):</label>
+          <input type="text" id="cfgBakerUrl" placeholder="https://exemplo.com/foto.jpg" class="w-full px-3 py-2 rounded-xl border border-slate-300 mb-2 focus:outline-none focus:ring-2 focus:ring-natalRed">
           <input type="file" id="cfgBakerFile" accept="image/*" class="w-full text-slate-500 text-[10px]">
         </div>
 
-        <button type="submit" class="w-full mt-2 py-2.5 bg-natalRed hover:bg-natalDarkRed text-white font-bold rounded-xl shadow transition">
-          Salvar Alterações
+        <button type="submit" class="w-full mt-3 py-2.5 bg-natalRed hover:bg-natalDarkRed text-white font-bold rounded-xl shadow transition">
+          Salvar Configurações
         </button>
       </form>
     </div>
   </div>
 
   <script>
-    // --- APP STATE & DOM ELEMENTS ---
     let mediaStream = null;
-    let currentFacingMode = 'user'; // 'user' (front) or 'environment' (back)
+    let currentFacingMode = 'user';
     let capturedCanvas = null;
 
-    // Elements
+    // DOM Elements
     const videoFeed = document.getElementById('videoFeed');
     const cameraContainer = document.getElementById('cameraContainer');
     const cameraOverlay = document.getElementById('cameraOverlay');
@@ -349,7 +339,7 @@
     const btnInstagram = document.getElementById('btnInstagram');
     const btnRetake = document.getElementById('btnRetake');
 
-    // Config & Overlay Elements
+    // Admin & Overlay Elements
     const txtTitle = document.getElementById('txtTitle');
     const overlayMsgTop = document.getElementById('overlayMsgTop');
     const overlayHandle = document.getElementById('overlayHandle');
@@ -366,7 +356,42 @@
     const cfgBakerUrl = document.getElementById('cfgBakerUrl');
     const cfgBakerFile = document.getElementById('cfgBakerFile');
 
-    // --- CAMERA LOGIC ---
+    function checkAdminMode() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const isAdmin = urlParams.get('admin') === 'true';
+
+      if (isAdmin) {
+        btnOpenConfig.classList.remove('hidden');
+      } else {
+        btnOpenConfig.classList.add('hidden');
+      }
+    }
+
+    function loadSavedSettings() {
+      const savedHandle = localStorage.getItem('natal_handle');
+      const savedTitle = localStorage.getItem('natal_title');
+      const savedMsg = localStorage.getItem('natal_msg');
+      const savedBakerImg = localStorage.getItem('natal_baker_img');
+
+      if (savedHandle) {
+        overlayHandle.innerText = savedHandle;
+        instructionHandle.innerText = savedHandle;
+        cfgHandle.value = savedHandle;
+      }
+      if (savedTitle) {
+        txtTitle.innerText = savedTitle;
+        cfgTitle.value = savedTitle;
+      }
+      if (savedMsg) {
+        overlayMsgTop.innerText = savedMsg;
+        cfgMsg.value = savedMsg;
+      }
+      if (savedBakerImg) {
+        imgBaker.src = savedBakerImg;
+        cfgBakerUrl.value = savedBakerImg;
+      }
+    }
+
     async function startCamera() {
       try {
         if (mediaStream) {
@@ -385,7 +410,6 @@
         mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
         videoFeed.srcObject = mediaStream;
 
-        // Apply visual flip if front camera
         if (currentFacingMode === 'user') {
           videoFeed.classList.add('mirror-mode');
         } else {
@@ -395,11 +419,10 @@
         cameraStartPrompt.classList.add('hidden');
       } catch (err) {
         console.error("Erro ao acessar a câmera: ", err);
-        alert("Não foi possível acessar a câmera. Verifique as permissões do seu navegador.");
+        alert("Não foi possível acessar a câmera. Verifique as permissões no seu navegador.");
       }
     }
 
-    // Toggle Front / Back Camera
     btnFlipCamera.addEventListener('click', () => {
       currentFacingMode = (currentFacingMode === 'user') ? 'environment' : 'user';
       startCamera();
@@ -407,11 +430,10 @@
 
     btnStartCamera.addEventListener('click', startCamera);
 
-    // --- PHOTO CAPTURE & CANVAS COMPOSITING ---
     btnCapture.addEventListener('click', () => {
       if (!mediaStream) return;
 
-      // Visual Flash Feedback
+      // Visual Flash animation
       flashOverlay.classList.remove('hidden');
       flashOverlay.classList.add('shutter-flash');
       setTimeout(() => {
@@ -419,42 +441,36 @@
         flashOverlay.classList.remove('shutter-flash');
       }, 400);
 
-      // Create high-res offscreen canvas
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
 
-      // Set resolution matching video ratio aspect (e.g., 3:4)
       const vWidth = videoFeed.videoWidth || 720;
       const vHeight = videoFeed.videoHeight || 960;
 
       canvas.width = vWidth;
       canvas.height = vHeight;
 
-      // 1. Draw Video Frame to Canvas
+      // Draw camera video frame
       ctx.save();
       if (currentFacingMode === 'user') {
-        // Mirror horizontally if front camera
         ctx.translate(canvas.width, 0);
         ctx.scale(-1, 1);
       }
       ctx.drawImage(videoFeed, 0, 0, canvas.width, canvas.height);
       ctx.restore();
 
-      // 2. Overlay Graphics onto Canvas
+      // Draw overlay elements
       drawOverlayGraphics(ctx, canvas.width, canvas.height);
 
-      // Save generated canvas
       capturedCanvas = canvas;
       const dataUrl = canvas.toDataURL('image/png');
 
-      // Display Result
       imgCaptured.src = dataUrl;
       cameraContainer.classList.add('hidden');
       cameraControls.classList.add('hidden');
       photoResultContainer.classList.remove('hidden');
     });
 
-    // Retake Photo
     btnRetake.addEventListener('click', () => {
       photoResultContainer.classList.add('hidden');
       cameraContainer.classList.remove('hidden');
@@ -462,24 +478,23 @@
     });
 
     function drawOverlayGraphics(ctx, width, height) {
-      // Scale factor based on canvas size
       const scale = width / 400;
 
-      // A. Top Banner Gradient & Text
+      // Top Gradient Header
       const topGrad = ctx.createLinearGradient(0, 0, 0, 100 * scale);
       topGrad.addColorStop(0, 'rgba(0,0,0,0.85)');
       topGrad.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = topGrad;
       ctx.fillRect(0, 0, width, 120 * scale);
 
-      ctx.fillStyle = '#FFD700'; // Gold
+      ctx.fillStyle = '#FFD700';
       ctx.font = `bold ${Math.round(18 * scale)}px Inter, sans-serif`;
       ctx.textAlign = 'center';
       ctx.shadowColor = 'black';
       ctx.shadowBlur = 6;
       ctx.fillText(`🎄 ${overlayMsgTop.innerText} 🍰`, width / 2, 40 * scale);
 
-      // B. Baker Avatar (Bottom Left)
+      // Baker Cutout Image
       const bakerImg = imgBaker;
       if (bakerImg && bakerImg.complete) {
         const avatarW = 140 * scale;
@@ -488,26 +503,23 @@
         const avatarY = height - avatarH - 45 * scale;
 
         ctx.save();
-        // Rounded border for Baker Image
         ctx.beginPath();
         ctx.roundRect(avatarX, avatarY, avatarW, avatarH, 16 * scale);
         ctx.clip();
         ctx.drawImage(bakerImg, avatarX, avatarY, avatarW, avatarH);
         ctx.restore();
 
-        // Gold border stroke
         ctx.strokeStyle = '#FFD700';
         ctx.lineWidth = 3 * scale;
         ctx.beginPath();
         ctx.roundRect(avatarX, avatarY, avatarW, avatarH, 16 * scale);
         ctx.stroke();
 
-        // Santa Hat Emoji Icon Drawing over avatar
         ctx.font = `${Math.round(36 * scale)}px sans-serif`;
         ctx.fillText('🎅', avatarX + (10 * scale), avatarY + (10 * scale));
       }
 
-      // C. Bottom Banner Gradient & Instagram Handle
+      // Bottom Gradient Footer
       const botGrad = ctx.createLinearGradient(0, height - (100 * scale), 0, height);
       botGrad.addColorStop(0, 'rgba(0,0,0,0)');
       botGrad.addColorStop(1, 'rgba(0,0,0,0.9)');
@@ -528,14 +540,12 @@
       ctx.lineWidth = 1.5 * scale;
       ctx.stroke();
 
-      // Handle Text
       ctx.fillStyle = '#FFD700';
       ctx.font = `bold ${Math.round(14 * scale)}px Inter, sans-serif`;
       ctx.textAlign = 'center';
       ctx.fillText(`📸 ${overlayHandle.innerText}`, width / 2, badgeY + (22 * scale));
     }
 
-    // Download Action
     btnDownload.addEventListener('click', () => {
       if (!capturedCanvas) return;
       const link = document.createElement('a');
@@ -544,9 +554,7 @@
       link.click();
     });
 
-    // Instagram Share Intent Action
     btnInstagram.addEventListener('click', () => {
-      // Download first so user has image ready
       if (capturedCanvas) {
         const link = document.createElement('a');
         link.download = `Selfie-Natal-Instagram.png`;
@@ -554,7 +562,6 @@
         link.click();
       }
 
-      // Deep link to Instagram Story / Camera
       setTimeout(() => {
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         if (isMobile) {
@@ -568,41 +575,51 @@
       }, 500);
     });
 
-    // Modal Open / Close
     btnOpenConfig.addEventListener('click', () => modalConfig.classList.remove('hidden'));
     btnCloseConfig.addEventListener('click', () => modalConfig.classList.add('hidden'));
 
-    // Handle Image File Upload in Config
     cfgBakerFile.addEventListener('change', (e) => {
       const file = e.target.files[0];
       if (file) {
         const reader = new FileReader();
         reader.onload = function(evt) {
-          imgBaker.src = evt.target.result;
+          const resultUrl = evt.target.result;
+          imgBaker.src = resultUrl;
+          localStorage.setItem('natal_baker_img', resultUrl);
         }
         reader.readAsDataURL(file);
       }
     });
 
-    // Save Configuration
     formConfig.addEventListener('submit', (e) => {
       e.preventDefault();
       
       const handleVal = cfgHandle.value.trim() || '@sua_confeitaria_aqui';
       overlayHandle.innerText = handleVal;
       instructionHandle.innerText = handleVal;
+      localStorage.setItem('natal_handle', handleVal);
 
-      if (cfgTitle.value.trim()) txtTitle.innerText = cfgTitle.value.trim();
-      if (cfgMsg.value.trim()) overlayMsgTop.innerText = cfgMsg.value.trim();
-      if (cfgBakerUrl.value.trim()) imgBaker.src = cfgBakerUrl.value.trim();
+      if (cfgTitle.value.trim()) {
+        txtTitle.innerText = cfgTitle.value.trim();
+        localStorage.setItem('natal_title', cfgTitle.value.trim());
+      }
 
+      if (cfgMsg.value.trim()) {
+        overlayMsgTop.innerText = cfgMsg.value.trim();
+        localStorage.setItem('natal_msg', cfgMsg.value.trim());
+      }
+
+      if (cfgBakerUrl.value.trim()) {
+        imgBaker.src = cfgBakerUrl.value.trim();
+        localStorage.setItem('natal_baker_img', cfgBakerUrl.value.trim());
+      }
+
+      alert("Configurações salvas com sucesso!");
       modalConfig.classList.add('hidden');
     });
 
-    // --- CANVAS SNOWFALL ANIMATION ---
     const snowCanvas = document.getElementById('snowCanvas');
     const snowCtx = snowCanvas.getContext('2d');
-
     let flakes = [];
 
     function resizeSnowCanvas() {
@@ -651,8 +668,10 @@
       createSnowflakes();
     });
 
-    // Start Snow on Load
+    // Page Load Initialization
     window.onload = function() {
+      checkAdminMode();
+      loadSavedSettings();
       resizeSnowCanvas();
       createSnowflakes();
       drawSnow();
