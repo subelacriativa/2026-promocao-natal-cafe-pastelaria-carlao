@@ -5,11 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Selfie de Natal com a Confeiteira 🍰🎄</title>
 
-/* Link do cliente: https://subelacriativa.github.io/2026-promocao-natal-cafe-pastelaria-carlao/ */
-/* Aparece o site para o cliente fazer a self */
-/* Link do admin: https://subelacriativa.github.io/2026-promocao-natal-cafe-pastelaria-carlao/?admin=true */
-/* Aparece uma engrenagem de configuração para o admin definir o @, a mensagem natalina e fazer o upload da foto */
-  
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- FontAwesome Icons -->
@@ -550,6 +545,11 @@
       ctx.textAlign = 'center';
       ctx.fillText(`📸 ${overlayHandle.innerText}`, width / 2, badgeY + (22 * scale));
     }
+
+/* Link do cliente: https://subelacriativa.github.io/2026-promocao-natal-cafe-pastelaria-carlao/ */
+/* Aparece o site para o cliente fazer a self */
+/* Link do admin: https://subelacriativa.github.io/2026-promocao-natal-cafe-pastelaria-carlao/?admin=true */
+/* Aparece uma engrenagem de configuração para o admin definir o @, a mensagem natalina e fazer o upload da foto */
 
     btnDownload.addEventListener('click', () => {
       if (!capturedCanvas) return;
